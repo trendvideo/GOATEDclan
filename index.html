@@ -20,6 +20,8 @@
             --notification: #ff4655;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
+            --male-color: #3498db;
+            --female-color: #e91e63;
         }
         
         * {
@@ -744,6 +746,60 @@
             margin-bottom: 20px;
         }
         
+        /* Gender selection */
+        .gender-selection {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .gender-option {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        
+        .gender-option.selected {
+            border-color: var(--primary);
+        }
+        
+        .gender-option.male {
+            background: rgba(52, 152, 219, 0.2);
+        }
+        
+        .gender-option.male.selected {
+            background: rgba(52, 152, 219, 0.5);
+            border-color: var(--male-color);
+        }
+        
+        .gender-option.female {
+            background: rgba(233, 30, 99, 0.2);
+        }
+        
+        .gender-option.female.selected {
+            background: rgba(233, 30, 99, 0.5);
+            border-color: var(--female-color);
+        }
+        
+        /* Robot avatar */
+        .robot-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 40px;
+            background-color: #333;
+            color: white;
+            border: 3px solid var(--primary);
+        }
+        
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .container {
@@ -852,6 +908,17 @@
             <p class="tagline" id="registerTagline">Prove your worth on the battlefield</p>
         </header>
         
+        <div class="robot-avatar" id="robotAvatar">🤖</div>
+        
+        <div class="gender-selection">
+            <div class="gender-option male" onclick="selectGender('male')">
+                <i class="fas fa-mars"></i> Male
+            </div>
+            <div class="gender-option female" onclick="selectGender('female')">
+                <i class="fas fa-venus"></i> Female
+            </div>
+        </div>
+        
         <div class="form-group">
             <label for="regUsername">Username</label>
             <input type="text" id="regUsername" placeholder="Choose a username" required>
@@ -921,12 +988,13 @@
         
         <div class="user-info">
             <div class="profile-pic-container">
-                <img id="userProfilePic" class="profile-pic" src="https://via.placeholder.com/100" alt="Profile Picture">
+                <div class="robot-avatar" id="userRobotAvatar">🤖</div>
                 <label class="profile-pic-upload">
-                    <input type="file" id="profilePicUpload" accept="image/*" onchange="uploadProfilePicture()">
+                    <input type="file" id="profilePicUpload" accept="image/*" onchange="uploadProfilePicture()" capture="camera">
                     <i class="fas fa-camera"></i>
                 </label>
             </div>
+            <p>Gender: <strong id="dashboardGender"></strong></p>
             <p>CODM Name: <strong id="dashboardCODMName"></strong></p>
             <p>Account Level: <strong id="dashboardLevel"></strong></p>
             <p>MP Rank: <strong id="dashboardMPRank"></strong></p>
@@ -1012,7 +1080,7 @@
             <div class="clan-banner">
                 <img id="clanBannerImg" src="" alt="Clan Banner">
                 <label class="clan-banner-upload" style="display: none;" id="clanBannerUploadBtn">
-                    <input type="file" id="clanBannerUpload" accept="image/*" onchange="uploadClanBanner()">
+                    <input type="file" id="clanBannerUpload" accept="image/*" onchange="uploadClanBanner()" capture="camera">
                     <i class="fas fa-camera"></i> Change Banner
                 </label>
             </div>
@@ -1154,14 +1222,14 @@
             </div>
             
             <div class="form-group">
-                <label for="clanLogo">Clan Logo URL</label>
-                <input type="text" id="clanLogo" placeholder="Enter image URL for clan logo">
+                <label for="clanLogo">Clan Logo</label>
+                <input type="file" id="clanLogo" accept="image/*" onchange="previewClanLogo()" capture="camera">
                 <img id="clanLogoPreview" class="image-preview" src="" alt="Clan Logo Preview">
             </div>
             
             <div class="form-group">
-                <label for="clanBannerUrl">Clan Banner URL</label>
-                <input type="text" id="clanBannerUrl" placeholder="Enter image URL for clan banner">
+                <label for="clanBanner">Clan Banner</label>
+                <input type="file" id="clanBanner" accept="image/*" onchange="previewClanBanner()" capture="camera">
                 <img id="clanBannerPreview" class="image-preview" src="" alt="Clan Banner Preview">
             </div>
             
@@ -1226,14 +1294,14 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="websiteLogo">Website Logo URL</label>
-                    <input type="text" id="websiteLogo" placeholder="Enter image URL for website logo">
+                    <label for="websiteLogo">Website Logo</label>
+                    <input type="file" id="websiteLogo" accept="image/*" onchange="previewWebsiteLogo()" capture="camera">
                     <img id="websiteLogoPreview" class="image-preview" src="" alt="Website Logo Preview">
                 </div>
                 
                 <div class="form-group">
-                    <label for="websiteBackground">Background Image URL</label>
-                    <input type="text" id="websiteBackground" placeholder="Enter image URL for background" value="https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt29d7c4f6bc077e9e/5eb26f54402b8b4d13a56656/COD_Mobile_Season_7_Key_Art.jpg">
+                    <label for="websiteBackground">Background Image</label>
+                    <input type="file" id="websiteBackground" accept="image/*" onchange="previewWebsiteBackground()" capture="camera">
                     <img id="websiteBackgroundPreview" class="image-preview" src="" alt="Background Preview">
                 </div>
                 
@@ -1280,7 +1348,9 @@
                 status: "Pending",
                 joinDate: new Date(2023, 5, 15).toISOString(),
                 notifications: [],
-                profilePic: "https://via.placeholder.com/100"
+                profilePic: "",
+                gender: "male",
+                robotAvatar: "🤖"
             },
             {
                 id: 2,
@@ -1294,7 +1364,9 @@
                 status: "Admin",
                 joinDate: new Date(2023, 0, 1).toISOString(),
                 notifications: [],
-                profilePic: "https://via.placeholder.com/100"
+                profilePic: "",
+                gender: "male",
+                robotAvatar: "🤖"
             },
             {
                 id: 3,
@@ -1308,7 +1380,9 @@
                 status: "Member",
                 joinDate: new Date(2023, 3, 22).toISOString(),
                 notifications: [],
-                profilePic: "https://via.placeholder.com/100"
+                profilePic: "",
+                gender: "female",
+                robotAvatar: "👩"
             }
         ];
         
@@ -1358,7 +1432,7 @@
         let notifications = [
             {
                 id: 1,
-                userId: 2, // Admin
+                userId: 2, // Admin user ID
                 type: "new-application",
                 title: "New Clan Application",
                 message: "player1 has submitted an application to join the clan",
@@ -1414,7 +1488,7 @@
                     level: 400,
                     mpRank: "Legendary",
                     brRank: "Legendary",
-                    avatar: "https://via.placeholder.com/40"
+                    avatar: ""
                 },
                 {
                     initials: "SK",
@@ -1422,7 +1496,7 @@
                     level: 387,
                     mpRank: "Legendary",
                     brRank: "Master",
-                    avatar: "https://via.placeholder.com/40"
+                    avatar: ""
                 },
                 {
                     initials: "TG",
@@ -1430,7 +1504,7 @@
                     level: 355,
                     mpRank: "Legendary",
                     brRank: "Legendary",
-                    avatar: "https://via.placeholder.com/40"
+                    avatar: ""
                 }
             ]
         };
@@ -1440,13 +1514,14 @@
             name: "GOATED Clan.CODM",
             tagline: "Elite Mobile Warfare | Season 7",
             logo: "",
-            background: "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt29d7c4f6bc077e9e/5eb26f54402b8b4d13a56656/COD_Mobile_Season_7_Key_Art.jpg",
+            background: "",
             theme: "default",
             allowRegistration: true
         };
         
         let currentUser = null;
         let unreadAdminNotifications = 0;
+        let selectedGender = null;
         
         // Helper function to format dates
         function formatDate(dateString) {
@@ -1511,6 +1586,23 @@
             }
         }
         
+        // Select gender during registration
+        function selectGender(gender) {
+            selectedGender = gender;
+            const maleOption = document.querySelector('.gender-option.male');
+            const femaleOption = document.querySelector('.gender-option.female');
+            
+            if (gender === 'male') {
+                maleOption.classList.add('selected');
+                femaleOption.classList.remove('selected');
+                document.getElementById('robotAvatar').textContent = "🤖";
+            } else {
+                femaleOption.classList.add('selected');
+                maleOption.classList.remove('selected');
+                document.getElementById('robotAvatar').textContent = "👩";
+            }
+        }
+        
         // Upload profile picture
         function uploadProfilePicture() {
             const fileInput = document.getElementById('profilePicUpload');
@@ -1532,9 +1624,6 @@
             
             const reader = new FileReader();
             reader.onload = function(e) {
-                const img = document.getElementById('userProfilePic');
-                img.src = e.target.result;
-                
                 // Update user's profile picture in database
                 users = users.map(user => {
                     if (user.id === currentUser.id) {
@@ -1544,6 +1633,16 @@
                 });
                 
                 currentUser.profilePic = e.target.result;
+                
+                // Update the profile pic display
+                const profilePicContainer = document.querySelector('.profile-pic-container');
+                profilePicContainer.innerHTML = `
+                    <img id="userProfilePic" class="profile-pic" src="${e.target.result}" alt="Profile Picture">
+                    <label class="profile-pic-upload">
+                        <input type="file" id="profilePicUpload" accept="image/*" onchange="uploadProfilePicture()" capture="camera">
+                        <i class="fas fa-camera"></i>
+                    </label>
+                `;
                 
                 showNotification('success', 'Profile picture updated successfully!');
                 
@@ -1567,9 +1666,9 @@
             reader.readAsDataURL(file);
         }
         
-        // Upload clan banner
-        function uploadClanBanner() {
-            const fileInput = document.getElementById('clanBannerUpload');
+        // Preview clan logo
+        function previewClanLogo() {
+            const fileInput = document.getElementById('clanLogo');
             const file = fileInput.files[0];
             
             if (!file) return;
@@ -1579,37 +1678,74 @@
                 return;
             }
             
-            if (file.size > 5 * 1024 * 1024) { // 5MB limit
-                showNotification('error', 'Image size should be less than 5MB');
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('clanLogoPreview').src = e.target.result;
+                document.getElementById('clanLogoPreview').style.display = 'block';
+                clanSettings.logo = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        // Preview clan banner
+        function previewClanBanner() {
+            const fileInput = document.getElementById('clanBanner');
+            const file = fileInput.files[0];
+            
+            if (!file) return;
+            
+            if (!file.type.match('image.*')) {
+                showNotification('error', 'Please select an image file');
                 return;
             }
             
-            showLoading("Uploading clan banner...");
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('clanBannerPreview').src = e.target.result;
+                document.getElementById('clanBannerPreview').style.display = 'block';
+                clanSettings.banner = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        // Preview website logo
+        function previewWebsiteLogo() {
+            const fileInput = document.getElementById('websiteLogo');
+            const file = fileInput.files[0];
+            
+            if (!file) return;
+            
+            if (!file.type.match('image.*')) {
+                showNotification('error', 'Please select an image file');
+                return;
+            }
             
             const reader = new FileReader();
             reader.onload = function(e) {
-                const img = document.getElementById('clanBannerImg');
-                img.src = e.target.result;
-                clanSettings.banner = e.target.result;
-                
-                showNotification('success', 'Clan banner updated successfully!');
-                
-                // Log activity
-                const activity = {
-                    id: activityLogs.length + 1,
-                    type: "clan-settings",
-                    userId: currentUser.id,
-                    username: currentUser.username,
-                    message: `${currentUser.username} updated the clan banner`,
-                    timestamp: new Date().toISOString()
-                };
-                activityLogs.unshift(activity);
-                
-                hideLoading();
+                document.getElementById('websiteLogoPreview').src = e.target.result;
+                document.getElementById('websiteLogoPreview').style.display = 'block';
+                websiteSettings.logo = e.target.result;
             };
-            reader.onerror = function() {
-                showNotification('error', 'Error uploading clan banner');
-                hideLoading();
+            reader.readAsDataURL(file);
+        }
+        
+        // Preview website background
+        function previewWebsiteBackground() {
+            const fileInput = document.getElementById('websiteBackground');
+            const file = fileInput.files[0];
+            
+            if (!file) return;
+            
+            if (!file.type.match('image.*')) {
+                showNotification('error', 'Please select an image file');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('websiteBackgroundPreview').src = e.target.result;
+                document.getElementById('websiteBackgroundPreview').style.display = 'block';
+                websiteSettings.background = e.target.result;
             };
             reader.readAsDataURL(file);
         }
@@ -1673,6 +1809,12 @@
                 showNotification('error', 'New registrations are currently disabled by admin');
                 return;
             }
+            
+            // Reset gender selection
+            selectedGender = null;
+            document.querySelector('.gender-option.male').classList.remove('selected');
+            document.querySelector('.gender-option.female').classList.remove('selected');
+            document.getElementById('robotAvatar').textContent = "🤖";
             
             document.getElementById('loginContainer').style.display = 'none';
             document.getElementById('registerContainer').style.display = 'block';
@@ -1807,6 +1949,11 @@
                 return;
             }
             
+            if (!selectedGender) {
+                document.getElementById('registerError').textContent = "Please select your gender!";
+                return;
+            }
+            
             if (password.length < 8) {
                 document.getElementById('registerError').textContent = "Password must be at least 8 characters!";
                 return;
@@ -1831,6 +1978,8 @@
             
             // Simulate network delay
             setTimeout(() => {
+                const robotAvatar = selectedGender === 'male' ? '🤖' : '👩';
+                
                 const newUser = {
                     id: users.length + 1,
                     username,
@@ -1843,7 +1992,9 @@
                     status: "Applicant",
                     joinDate: new Date().toISOString(),
                     notifications: [],
-                    profilePic: "https://via.placeholder.com/100"
+                    profilePic: "",
+                    gender: selectedGender,
+                    robotAvatar
                 };
                 
                 users.push(newUser);
@@ -1894,13 +2045,26 @@
             
             // Update user info
             document.getElementById('dashboardUsername').textContent = currentUser.username;
+            document.getElementById('dashboardGender').textContent = currentUser.gender === 'male' ? 'Male' : 'Female';
             document.getElementById('dashboardCODMName').textContent = currentUser.codmName;
             document.getElementById('dashboardLevel').textContent = currentUser.level;
             document.getElementById('dashboardMPRank').textContent = currentUser.mpRank;
             document.getElementById('dashboardBRRank').textContent = currentUser.brRank;
             
-            // Set profile picture
-            document.getElementById('userProfilePic').src = currentUser.profilePic;
+            // Set profile picture or robot avatar
+            const profilePicContainer = document.querySelector('.profile-pic-container');
+            if (currentUser.profilePic) {
+                profilePicContainer.innerHTML = `
+                    <img id="userProfilePic" class="profile-pic" src="${currentUser.profilePic}" alt="Profile Picture">
+                    <label class="profile-pic-upload">
+                        <input type="file" id="profilePicUpload" accept="image/*" onchange="uploadProfilePicture()" capture="camera">
+                        <i class="fas fa-camera"></i>
+                    </label>
+                `;
+            } else {
+                document.getElementById('userRobotAvatar').textContent = currentUser.robotAvatar;
+                document.getElementById('userRobotAvatar').style.display = 'flex';
+            }
             
             // Set status
             const statusElement = document.getElementById('dashboardStatus');
@@ -2054,14 +2218,23 @@
                 regularUsers.forEach(user => {
                     const card = document.createElement('div');
                     card.className = 'user-card';
+                    
+                    let avatarContent = '';
+                    if (user.profilePic) {
+                        avatarContent = `<img src="${user.profilePic}" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px; object-fit: cover;">`;
+                    } else {
+                        avatarContent = `<div style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px; background: #333; color: white; display: flex; align-items: center; justify-content: center; font-size: 20px;">${user.robotAvatar}</div>`;
+                    }
+                    
                     card.innerHTML = `
                         <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                            <img src="${user.profilePic}" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px; object-fit: cover;">
+                            ${avatarContent}
                             <div>
                                 <h4>${user.username} (${user.codmName})</h4>
                                 <p>Level: ${user.level} | MP: ${user.mpRank} | BR: ${user.brRank}</p>
                             </div>
                         </div>
+                        <p>Gender: ${user.gender === 'male' ? 'Male' : 'Female'}</p>
                         <p>Status: <span class="status-badge status-${user.status.toLowerCase()}">${user.status}</span></p>
                         <p>Joined: ${formatDate(user.joinDate)}</p>
                         <div class="admin-actions">
@@ -2213,8 +2386,11 @@
         function loadClanSettings() {
             document.getElementById('clanName').value = clanSettings.name;
             document.getElementById('clanTag').value = clanSettings.tag;
-            document.getElementById('clanLogo').value = clanSettings.logo;
-            document.getElementById('clanBannerUrl').value = clanSettings.banner;
+            
+            // Reset file inputs
+            document.getElementById('clanLogo').value = '';
+            document.getElementById('clanBanner').value = '';
+            
             document.getElementById('totalMembersSetting').value = clanSettings.stats.totalMembers;
             document.getElementById('legendaryPlayersSetting').value = clanSettings.stats.legendaryPlayers;
             document.getElementById('avgLevelSetting').value = clanSettings.stats.avgLevel;
@@ -2258,8 +2434,11 @@
         function loadWebsiteSettings() {
             document.getElementById('websiteName').value = websiteSettings.name;
             document.getElementById('websiteTagline').value = websiteSettings.tagline;
-            document.getElementById('websiteLogo').value = websiteSettings.logo;
-            document.getElementById('websiteBackground').value = websiteSettings.background;
+            
+            // Reset file inputs
+            document.getElementById('websiteLogo').value = '';
+            document.getElementById('websiteBackground').value = '';
+            
             document.getElementById('websiteTheme').value = websiteSettings.theme;
             document.getElementById('websiteRegistration').value = websiteSettings.allowRegistration ? 'true' : 'false';
             
@@ -2313,7 +2492,7 @@
                 <div class="member-edit-fields">
                     <div class="member-avatar-edit">
                         <img id="memberAvatar_${memberId}" src="${avatar || 'https://via.placeholder.com/40'}" alt="${initials}">
-                        <input type="file" id="memberAvatarUpload_${memberId}" accept="image/*" style="display: none;" onchange="updateMemberAvatar('${memberId}')">
+                        <input type="file" id="memberAvatarUpload_${memberId}" accept="image/*" style="display: none;" onchange="updateMemberAvatar('${memberId}')" capture="camera">
                         <label for="memberAvatarUpload_${memberId}" style="position: absolute; bottom: -5px; right: -5px; background: var(--primary); color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; cursor: pointer;">+</label>
                     </div>
                     <div style="flex: 1;">
@@ -2389,8 +2568,6 @@
                 // Basic info
                 clanSettings.name = document.getElementById('clanName').value || "GOATED Clan.CODM";
                 clanSettings.tag = document.getElementById('clanTag').value || "GOAT";
-                clanSettings.logo = document.getElementById('clanLogo').value;
-                clanSettings.banner = document.getElementById('clanBannerUrl').value;
                 
                 // Stats
                 clanSettings.stats = {
@@ -2462,8 +2639,6 @@
                 // Basic info
                 websiteSettings.name = document.getElementById('websiteName').value || "GOATED Clan.CODM";
                 websiteSettings.tagline = document.getElementById('websiteTagline').value || "Elite Mobile Warfare";
-                websiteSettings.logo = document.getElementById('websiteLogo').value;
-                websiteSettings.background = document.getElementById('websiteBackground').value;
                 websiteSettings.theme = document.getElementById('websiteTheme').value;
                 websiteSettings.allowRegistration = document.getElementById('websiteRegistration').value === 'true';
                 
@@ -2524,8 +2699,16 @@
                 clanSettings.topMembers.forEach(member => {
                     const item = document.createElement('div');
                     item.className = 'member-item';
+                    
+                    let avatarContent = '';
+                    if (member.avatar) {
+                        avatarContent = `<img src="${member.avatar}" alt="${member.initials}">`;
+                    } else {
+                        avatarContent = `<div style="width: 40px; height: 40px; border-radius: 50%; background: #333; color: white; display: flex; align-items: center; justify-content: center; font-size: 16px;">${member.initials}</div>`;
+                    }
+                    
                     item.innerHTML = `
-                        <div class="member-avatar"><img src="${member.avatar || 'https://via.placeholder.com/40'}" alt="${member.initials}"></div>
+                        <div class="member-avatar">${avatarContent}</div>
                         <div class="member-info">
                             <div class="member-name">${member.name}</div>
                             <div class="member-details">Level ${member.level} | MP: ${member.mpRank} | BR: ${member.brRank}</div>
@@ -2570,6 +2753,8 @@
             // Update background
             if (websiteSettings.background) {
                 document.body.style.backgroundImage = `url('${websiteSettings.background}')`;
+            } else {
+                document.body.style.backgroundImage = '';
             }
             
             // Update logo preview
@@ -3074,47 +3259,6 @@
             
             // Initialize clan info display
             updateClanInfoDisplay();
-            
-            // Add event listeners for image previews
-            document.getElementById('clanLogo').addEventListener('input', function() {
-                const preview = document.getElementById('clanLogoPreview');
-                if (this.value) {
-                    preview.src = this.value;
-                    preview.style.display = 'block';
-                } else {
-                    preview.style.display = 'none';
-                }
-            });
-            
-            document.getElementById('clanBannerUrl').addEventListener('input', function() {
-                const preview = document.getElementById('clanBannerPreview');
-                if (this.value) {
-                    preview.src = this.value;
-                    preview.style.display = 'block';
-                } else {
-                    preview.style.display = 'none';
-                }
-            });
-            
-            document.getElementById('websiteLogo').addEventListener('input', function() {
-                const preview = document.getElementById('websiteLogoPreview');
-                if (this.value) {
-                    preview.src = this.value;
-                    preview.style.display = 'block';
-                } else {
-                    preview.style.display = 'none';
-                }
-            });
-            
-            document.getElementById('websiteBackground').addEventListener('input', function() {
-                const preview = document.getElementById('websiteBackgroundPreview');
-                if (this.value) {
-                    preview.src = this.value;
-                    preview.style.display = 'block';
-                } else {
-                    preview.style.display = 'none';
-                }
-            });
         });
     </script>
 </body>
