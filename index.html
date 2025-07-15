@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOATED Clan.CODM - Elite Mobile Warfare</title>
+    <title>THE RaTELs - CRYPTO SQUAD 😂</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -85,6 +85,7 @@
         
         .form-group {
             margin-bottom: 20px;
+            position: relative;
         }
         
         label {
@@ -880,6 +881,36 @@
             cursor: pointer;
         }
         
+        /* Show password toggle */
+        .show-password {
+            position: absolute;
+            right: 10px;
+            top: 40px;
+            cursor: pointer;
+            color: rgba(236, 232, 225, 0.7);
+            transition: var(--transition);
+        }
+        
+        .show-password:hover {
+            color: var(--primary);
+        }
+        
+        /* Forgot password link */
+        .forgot-password {
+            text-align: right;
+            margin-top: 5px;
+        }
+        
+        .forgot-password a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+        
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .container {
@@ -965,14 +996,14 @@
     <!-- WhatsApp Feedback Button -->
     <div class="feedback-btn" onclick="sendFeedback()">
         <i class="fab fa-whatsapp"></i>
-        <span class="feedback-tooltip">Tap here to message admin on what could be added to the website</span>
+        <span class="feedback-tooltip">Message admin to add more features to the website</span>
     </div>
 
     <!-- Login Container -->
     <div class="container" id="loginContainer">
         <header>
-            <div class="logo" id="mainLogo">GOATED Clan.CODM</div>
-            <p class="tagline" id="mainTagline">Elite Mobile Warfare | Season 7</p>
+            <div class="logo" id="mainLogo">THE RaTELs</div>
+            <p class="tagline" id="mainTagline">CRYPTO SQUAD 😂</p>
         </header>
         
         <div class="form-group">
@@ -983,13 +1014,16 @@
         <div class="form-group">
             <label for="password">Password</label>
             <input type="password" id="password" placeholder="Enter your password" required>
+            <span class="show-password" onclick="togglePassword('password')">
+                <i class="fas fa-eye"></i>
+            </span>
+            <div class="forgot-password">
+                <a href="#" onclick="showForgotPassword()">Forgot password?</a>
+            </div>
         </div>
         
         <button onclick="login()">
             <i class="fas fa-sign-in-alt"></i> Login
-        </button>
-        <button onclick="showAdminLogin()" style="background: var(--legendary); margin-top: 10px;">
-            <i class="fas fa-user-shield"></i> Admin Login
         </button>
         
         <p id="loginError" class="error-message"></p>
@@ -999,14 +1033,43 @@
         </p>
     </div>
     
+    <!-- Forgot Password Container -->
+    <div class="container" id="forgotPasswordContainer" style="display: none;">
+        <header>
+            <div class="logo">Reset Password</div>
+            <p class="tagline">Enter your details to reset your password</p>
+        </header>
+        
+        <div class="form-group">
+            <label for="forgotUsername">Username</label>
+            <input type="text" id="forgotUsername" placeholder="Enter your username" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="forgotDob">Date of Birth</label>
+            <input type="date" id="forgotDob" required>
+        </div>
+        
+        <button onclick="resetPassword()">
+            <i class="fas fa-key"></i> Reset Password
+        </button>
+        
+        <p id="forgotError" class="error-message"></p>
+        <p id="forgotSuccess" class="success-message"></p>
+        
+        <button class="logout-btn" onclick="showLogin()">
+            <i class="fas fa-arrow-left"></i> Back to Login
+        </button>
+    </div>
+    
     <!-- Register Container -->
     <div class="container" id="registerContainer" style="display: none;">
         <header>
-            <div class="logo" id="registerLogo">Join GOATED Clan</div>
+            <div class="logo" id="registerLogo">Join THE RaTELs</div>
             <p class="tagline" id="registerTagline">Prove your worth on the battlefield</p>
         </header>
         
-        <div class="robot-avatar" id="robotAvatar">🤖</div>
+        <div class="robot-avatar" id="robotAvatar">👨</div>
         
         <div class="gender-selection">
             <div class="gender-option male" onclick="selectGender('male')">
@@ -1025,6 +1088,22 @@
         <div class="form-group">
             <label for="regPassword">Password (min 8 characters)</label>
             <input type="password" id="regPassword" placeholder="Create a strong password" required minlength="8">
+            <span class="show-password" onclick="togglePassword('regPassword')">
+                <i class="fas fa-eye"></i>
+            </span>
+        </div>
+        
+        <div class="form-group">
+            <label for="regConfirmPassword">Confirm Password</label>
+            <input type="password" id="regConfirmPassword" placeholder="Confirm your password" required minlength="8">
+            <span class="show-password" onclick="togglePassword('regConfirmPassword')">
+                <i class="fas fa-eye"></i>
+            </span>
+        </div>
+        
+        <div class="form-group">
+            <label for="regDob">Date of Birth</label>
+            <input type="date" id="regDob" required>
         </div>
         
         <div class="form-group">
@@ -1064,6 +1143,17 @@
             </div>
         </div>
         
+        <div class="form-group">
+            <label for="profilePicture">Profile Picture</label>
+            <div class="file-input-wrapper">
+                <div class="file-input-button">
+                    <i class="fas fa-image"></i> Select Profile Picture
+                </div>
+                <input type="file" class="file-input" id="profilePicture" accept="image/*">
+            </div>
+            <img id="profilePicturePreview" class="image-preview" src="" alt="Profile Picture Preview">
+        </div>
+        
         <button onclick="register()">
             <i class="fas fa-user-plus"></i> Register
         </button>
@@ -1086,9 +1176,9 @@
         
         <div class="user-info">
             <div class="profile-pic-container">
-                <div class="robot-avatar" id="userRobotAvatar">🤖</div>
+                <img id="userProfilePic" class="profile-pic" src="" alt="Profile Picture">
                 <label class="profile-pic-upload">
-                    <input type="file" id="profilePicUpload" accept="image/*" onchange="uploadProfilePicture()" capture>
+                    <input type="file" id="profilePicUpload" accept="image/*" onchange="uploadProfilePicture()">
                     <i class="fas fa-camera"></i>
                 </label>
             </div>
@@ -1128,8 +1218,8 @@
                 <p style="margin-bottom: 15px; color: rgba(236, 232, 225, 0.8);">
                     Please provide detailed information about your skills and experience. Legendary ranked players get priority review.
                 </p>
-                <label for="applicationReason">Why should you join GOATED Clan? (Min. 100 characters)</label>
-                <textarea id="applicationReason" placeholder="Tell us about your skills, experience, play style, preferred roles, and why you want to join our clan... (Minimum 100 characters)" minlength="100"></textarea>
+                <label for="applicationReason">Why should you join THE RaTELs? (Min. 10 characters)</label>
+                <textarea id="applicationReason" placeholder="Tell us about your skills, experience, play style, preferred roles, and why you want to join our clan... (Minimum 10 characters)" minlength="10"></textarea>
                 <button onclick="submitApplication()">
                     <i class="fas fa-paper-plane"></i> Submit Application
                 </button>
@@ -1145,16 +1235,25 @@
             <div class="form-group">
                 <label for="changePasswordCurrent">Current Password</label>
                 <input type="password" id="changePasswordCurrent" placeholder="Enter your current password">
+                <span class="show-password" onclick="togglePassword('changePasswordCurrent')">
+                    <i class="fas fa-eye"></i>
+                </span>
             </div>
             
             <div class="form-group">
                 <label for="changePasswordNew">New Password</label>
                 <input type="password" id="changePasswordNew" placeholder="Enter new password (min 8 characters)" minlength="8">
+                <span class="show-password" onclick="togglePassword('changePasswordNew')">
+                    <i class="fas fa-eye"></i>
+                </span>
             </div>
             
             <div class="form-group">
                 <label for="changePasswordConfirm">Confirm New Password</label>
                 <input type="password" id="changePasswordConfirm" placeholder="Confirm new password">
+                <span class="show-password" onclick="togglePassword('changePasswordConfirm')">
+                    <i class="fas fa-eye"></i>
+                </span>
             </div>
             
             <button onclick="changePassword()">
@@ -1178,7 +1277,7 @@
             <div class="clan-banner">
                 <img id="clanBannerImg" src="" alt="Clan Banner">
                 <label class="clan-banner-upload" style="display: none;" id="clanBannerUploadBtn">
-                    <input type="file" id="clanBannerUpload" accept="image/*" onchange="uploadClanBanner()" capture>
+                    <input type="file" id="clanBannerUpload" accept="image/*" onchange="uploadClanBanner()">
                     <i class="fas fa-camera"></i> Change Banner
                 </label>
             </div>
@@ -1216,33 +1315,6 @@
         </div>
     </div>
     
-    <!-- Admin Login -->
-    <div class="container" id="adminLoginContainer" style="display: none;">
-        <header>
-            <div class="logo">Admin Portal</div>
-            <p class="tagline">GOATED Clan Management System</p>
-        </header>
-        
-        <div class="form-group">
-            <label for="adminUsername">Username</label>
-            <input type="text" id="adminUsername" placeholder="Enter admin username" required>
-        </div>
-        
-        <div class="form-group">
-            <label for="adminPassword">Password</label>
-            <input type="password" id="adminPassword" placeholder="Enter admin password" required>
-        </div>
-        
-        <button onclick="adminLogin()">
-            <i class="fas fa-sign-in-alt"></i> Login
-        </button>
-        <p id="adminLoginError" class="error-message"></p>
-        
-        <button class="logout-btn" onclick="showLogin()">
-            <i class="fas fa-arrow-left"></i> Back to Login
-        </button>
-    </div>
-    
     <!-- Admin Dashboard -->
     <div class="container admin-dashboard" id="adminDashboard">
         <div class="admin-alert">
@@ -1263,6 +1335,9 @@
             </div>
             <div class="tab" onclick="switchAdminTab('usersTab')">
                 <i class="fas fa-users"></i> Users
+            </div>
+            <div class="tab" onclick="switchAdminTab('membersActivityTab')">
+                <i class="fas fa-user-clock"></i> Members Activity
             </div>
             <div class="tab" onclick="switchAdminTab('activityTab')">
                 <i class="fas fa-history"></i> Activity
@@ -1292,6 +1367,13 @@
             </div>
         </div>
         
+        <div id="membersActivityTab" class="tab-content">
+            <h3><i class="fas fa-user-clock"></i> Members Activity</h3>
+            <div class="activity-log" id="membersActivityLog">
+                <!-- Members activity logs will be loaded here -->
+            </div>
+        </div>
+        
         <div id="activityTab" class="tab-content">
             <h3><i class="fas fa-clipboard-list"></i> Activity Log</h3>
             <div class="activity-log" id="activityLog">
@@ -1311,7 +1393,7 @@
             
             <div class="form-group">
                 <label for="clanName">Clan Name</label>
-                <input type="text" id="clanName" placeholder="Enter clan name" value="GOATED Clan.CODM">
+                <input type="text" id="clanName" placeholder="Enter clan name" value="THE RaTELs">
             </div>
             
             <div class="form-group">
@@ -1393,12 +1475,12 @@
             <div class="website-settings">
                 <div class="form-group">
                     <label for="websiteName">Website Name</label>
-                    <input type="text" id="websiteName" placeholder="Enter website name" value="GOATED Clan.CODM">
+                    <input type="text" id="websiteName" placeholder="Enter website name" value="RaTEL CoDM">
                 </div>
                 
                 <div class="form-group">
                     <label for="websiteTagline">Website Tagline</label>
-                    <input type="text" id="websiteTagline" placeholder="Enter website tagline" value="Elite Mobile Warfare | Season 7">
+                    <input type="text" id="websiteTagline" placeholder="Enter website tagline" value="CRYPTO SQUAD 😂">
                 </div>
                 
                 <div class="form-group">
@@ -1468,7 +1550,8 @@
                 notifications: [],
                 profilePic: "",
                 gender: "male",
-                robotAvatar: "🤖"
+                dob: "1990-01-01",
+                robotAvatar: "👨"
             },
             {
                 id: 2,
@@ -1484,7 +1567,8 @@
                 notifications: [],
                 profilePic: "",
                 gender: "male",
-                robotAvatar: "🤖"
+                dob: "1985-05-15",
+                robotAvatar: "👨"
             },
             {
                 id: 3,
@@ -1500,6 +1584,7 @@
                 notifications: [],
                 profilePic: "",
                 gender: "female",
+                dob: "1995-10-20",
                 robotAvatar: "👩"
             }
         ];
@@ -1544,6 +1629,14 @@
                 username: "proplayer",
                 message: "New user registered: proplayer (SniperKing)",
                 timestamp: new Date(2023, 3, 22).toISOString()
+            },
+            {
+                id: 4,
+                type: "registration",
+                userId: 1,
+                username: "player1",
+                message: "New user registered: player1 (password: test123)",
+                timestamp: new Date(2023, 5, 15).toISOString()
             }
         ];
         
@@ -1567,12 +1660,22 @@
                 timestamp: new Date(2023, 5, 16).toISOString(),
                 read: false,
                 relatedId: 1 // Application ID
+            },
+            {
+                id: 3,
+                userId: 2, // Admin
+                type: "new-user",
+                title: "New User Registration",
+                message: "User 'proplayer' (password: codmpro) just registered to THE RaTELs clan website",
+                timestamp: new Date(2023, 3, 22).toISOString(),
+                read: false,
+                relatedId: 3 // User ID
             }
         ];
         
         // Clan settings data with localStorage persistence
         let clanSettings = JSON.parse(localStorage.getItem('goatedClanSettings')) || {
-            name: "GOATED Clan.CODM",
+            name: "THE RaTELs",
             tag: "GOAT",
             logo: "",
             banner: "",
@@ -1629,8 +1732,8 @@
         
         // Website settings with localStorage persistence
         let websiteSettings = JSON.parse(localStorage.getItem('goatedClanWebsiteSettings')) || {
-            name: "GOATED Clan.CODM",
-            tagline: "Elite Mobile Warfare | Season 7",
+            name: "RaTEL CoDM",
+            tagline: "CRYPTO SQUAD 😂",
             logo: "",
             background: "",
             theme: "default",
@@ -1640,6 +1743,7 @@
         let currentUser = null;
         let unreadAdminNotifications = 0;
         let selectedGender = null;
+        let profilePictureFile = null;
         
         // Save data to localStorage
         function saveDataToStorage() {
@@ -1745,9 +1849,24 @@
         // Send feedback via WhatsApp
         function sendFeedback() {
             const phoneNumber = "08159035074";
-            const message = "Hello GOATED Clan Admin, I have a suggestion/feedback about the website:";
+            const message = "Hello THE RaTELs Admin, I have a suggestion/feedback about the website:";
             const encodedMessage = encodeURIComponent(message);
             window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+        }
+        
+        // Toggle password visibility
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            const icon = document.querySelector(`#${fieldId} + .show-password i`);
+            if (field.type === "password") {
+                field.type = "text";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            } else {
+                field.type = "password";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            }
         }
         
         // Select gender during registration
@@ -1759,13 +1878,38 @@
             if (gender === 'male') {
                 maleOption.classList.add('selected');
                 femaleOption.classList.remove('selected');
-                document.getElementById('robotAvatar').textContent = "🤖";
+                document.getElementById('robotAvatar').textContent = "👨";
             } else {
                 femaleOption.classList.add('selected');
                 maleOption.classList.remove('selected');
                 document.getElementById('robotAvatar').textContent = "👩";
             }
         }
+        
+        // Handle profile picture selection during registration
+        document.getElementById('profilePicture').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            if (!file.type.match('image.*')) {
+                showNotification('error', 'Please select an image file (JPEG, PNG, etc.)');
+                return;
+            }
+            
+            if (file.size > 2 * 1024 * 1024) { // 2MB limit
+                showNotification('error', 'Image size should be less than 2MB');
+                return;
+            }
+            
+            profilePictureFile = file;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('profilePicturePreview').src = e.target.result;
+                document.getElementById('profilePicturePreview').style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        });
         
         // Upload profile picture
         function uploadProfilePicture() {
@@ -1804,7 +1948,7 @@
                 profilePicContainer.innerHTML = `
                     <img id="userProfilePic" class="profile-pic" src="${e.target.result}" alt="Profile Picture">
                     <label class="profile-pic-upload">
-                        <input type="file" id="profilePicUpload" accept="image/*" onchange="uploadProfilePicture()" capture>
+                        <input type="file" id="profilePicUpload" accept="image/*" onchange="uploadProfilePicture()">
                         <i class="fas fa-camera"></i>
                     </label>
                 `;
@@ -2018,10 +2162,21 @@
         function showLogin() {
             document.getElementById('loginContainer').style.display = 'block';
             document.getElementById('registerContainer').style.display = 'none';
+            document.getElementById('forgotPasswordContainer').style.display = 'none';
             document.getElementById('userDashboard').style.display = 'none';
             document.getElementById('adminDashboard').style.display = 'none';
-            document.getElementById('adminLoginContainer').style.display = 'none';
             document.getElementById('loginError').textContent = '';
+        }
+        
+        // Show forgot password form
+        function showForgotPassword() {
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('registerContainer').style.display = 'none';
+            document.getElementById('forgotPasswordContainer').style.display = 'block';
+            document.getElementById('userDashboard').style.display = 'none';
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('forgotError').textContent = '';
+            document.getElementById('forgotSuccess').textContent = '';
         }
         
         // Show register form
@@ -2031,29 +2186,84 @@
                 return;
             }
             
+            // Reset form
+            document.getElementById('regUsername').value = '';
+            document.getElementById('regPassword').value = '';
+            document.getElementById('regConfirmPassword').value = '';
+            document.getElementById('regDob').value = '';
+            document.getElementById('regCODMName').value = '';
+            document.getElementById('regLevel').value = '';
+            document.getElementById('regMPRank').value = '';
+            document.getElementById('regBRRank').value = '';
+            document.getElementById('profilePicture').value = '';
+            document.getElementById('profilePicturePreview').src = '';
+            document.getElementById('profilePicturePreview').style.display = 'none';
+            document.getElementById('registerError').textContent = '';
+            document.getElementById('registerSuccess').textContent = '';
+            
             // Reset gender selection
             selectedGender = null;
             document.querySelector('.gender-option.male').classList.remove('selected');
             document.querySelector('.gender-option.female').classList.remove('selected');
-            document.getElementById('robotAvatar').textContent = "🤖";
+            document.getElementById('robotAvatar').textContent = "👨";
             
             document.getElementById('loginContainer').style.display = 'none';
             document.getElementById('registerContainer').style.display = 'block';
+            document.getElementById('forgotPasswordContainer').style.display = 'none';
             document.getElementById('userDashboard').style.display = 'none';
             document.getElementById('adminDashboard').style.display = 'none';
-            document.getElementById('adminLoginContainer').style.display = 'none';
-            document.getElementById('registerError').textContent = '';
-            document.getElementById('registerSuccess').textContent = '';
         }
         
-        // Show admin login
-        function showAdminLogin() {
-            document.getElementById('loginContainer').style.display = 'none';
-            document.getElementById('registerContainer').style.display = 'none';
-            document.getElementById('userDashboard').style.display = 'none';
-            document.getElementById('adminDashboard').style.display = 'none';
-            document.getElementById('adminLoginContainer').style.display = 'block';
-            document.getElementById('adminLoginError').textContent = '';
+        // Reset password
+        function resetPassword() {
+            const username = document.getElementById('forgotUsername').value.trim();
+            const dob = document.getElementById('forgotDob').value;
+            
+            if (!username || !dob) {
+                document.getElementById('forgotError').textContent = "Please enter both username and date of birth!";
+                return;
+            }
+            
+            showLoading("Resetting password...");
+            
+            setTimeout(() => {
+                const user = users.find(u => u.username === username && u.dob === dob);
+                
+                if (!user) {
+                    document.getElementById('forgotError').textContent = "No account found with those details!";
+                    hideLoading();
+                    return;
+                }
+                
+                // Generate a simple temporary password
+                const tempPassword = Math.random().toString(36).slice(-8);
+                
+                // Update user's password
+                users = users.map(u => {
+                    if (u.id === user.id) {
+                        return {...u, password: tempPassword};
+                    }
+                    return u;
+                });
+                saveDataToStorage();
+                
+                document.getElementById('forgotError').textContent = "";
+                document.getElementById('forgotSuccess').textContent = `Your password has been reset to: ${tempPassword}`;
+                
+                // Log activity
+                const activity = {
+                    id: activityLogs.length + 1,
+                    type: "password-reset",
+                    userId: user.id,
+                    username: user.username,
+                    message: `Password reset for ${user.username}`,
+                    timestamp: new Date().toISOString()
+                };
+                activityLogs.unshift(activity);
+                saveDataToStorage();
+                
+                hideLoading();
+            }, 1000);
         }
         
         // Login function
@@ -2113,67 +2323,20 @@
             }, 1000);
         }
         
-        // Admin login
-        function adminLogin() {
-            const username = document.getElementById('adminUsername').value.trim();
-            const password = document.getElementById('adminPassword').value.trim();
-            
-            if (!username || !password) {
-                document.getElementById('adminLoginError').textContent = "Please enter both username and password!";
-                return;
-            }
-            
-            showLoading("Authenticating admin...");
-            
-            // Simulate network delay
-            setTimeout(() => {
-                const user = users.find(u => u.username === username && u.password === password && u.isAdmin);
-                
-                if (!user) {
-                    document.getElementById('adminLoginError').textContent = "Invalid admin credentials!";
-                    hideLoading();
-                    return;
-                }
-                
-                currentUser = user;
-                
-                // Log activity
-                const activity = {
-                    id: activityLogs.length + 1,
-                    type: "login",
-                    userId: user.id,
-                    username: user.username,
-                    message: "Admin logged in",
-                    timestamp: new Date().toISOString()
-                };
-                activityLogs.unshift(activity);
-                saveDataToStorage();
-                
-                // Check for unread notifications
-                unreadAdminNotifications = notifications.filter(n => n.userId === 2 && !n.read).length;
-                updateAdminNotificationBadge();
-                
-                showAdminDashboard();
-                hideLoading();
-            }, 1000);
-        }
-        
         // Register function
         function register() {
             const username = document.getElementById('regUsername').value.trim();
             const password = document.getElementById('regPassword').value.trim();
+            const confirmPassword = document.getElementById('regConfirmPassword').value.trim();
+            const dob = document.getElementById('regDob').value;
             const codmName = document.getElementById('regCODMName').value.trim();
             const level = parseInt(document.getElementById('regLevel').value);
             const mpRank = document.getElementById('regMPRank').value;
             const brRank = document.getElementById('regBRRank').value;
             
-            if (!username || !password || !codmName || !mpRank || !brRank || isNaN(level)) {
+            // Validate inputs
+            if (!username || !password || !confirmPassword || !dob || !codmName || !level || !mpRank || !brRank) {
                 document.getElementById('registerError').textContent = "All fields are required!";
-                return;
-            }
-            
-            if (!selectedGender) {
-                document.getElementById('registerError').textContent = "Please select your gender!";
                 return;
             }
             
@@ -2182,90 +2345,106 @@
                 return;
             }
             
-            if (level < 1 || level > 400) {
+            if (password !== confirmPassword) {
+                document.getElementById('registerError').textContent = "Passwords do not match!";
+                return;
+            }
+            
+            if (level < 1 || level > 400 || isNaN(level)) {
                 document.getElementById('registerError').textContent = "Level must be between 1 and 400!";
                 return;
             }
             
-            if (users.some(user => user.username === username)) {
+            if (!selectedGender) {
+                document.getElementById('registerError').textContent = "Please select your gender!";
+                return;
+            }
+            
+            // Check if username already exists
+            if (users.some(u => u.username.toLowerCase() === username.toLowerCase())) {
                 document.getElementById('registerError').textContent = "Username already exists!";
                 return;
             }
             
-            if (users.some(user => user.codmName === codmName)) {
-                document.getElementById('registerError').textContent = "CODM name already registered!";
-                return;
+            showLoading("Creating account...");
+            
+            // Process profile picture if selected
+            let profilePic = "";
+            if (profilePictureFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profilePic = e.target.result;
+                    completeRegistration(username, password, dob, codmName, level, mpRank, brRank, profilePic);
+                };
+                reader.onerror = function() {
+                    completeRegistration(username, password, dob, codmName, level, mpRank, brRank, "");
+                };
+                reader.readAsDataURL(profilePictureFile);
+            } else {
+                completeRegistration(username, password, dob, codmName, level, mpRank, brRank, "");
             }
+        }
+        
+        function completeRegistration(username, password, dob, codmName, level, mpRank, brRank, profilePic) {
+            // Create new user
+            const newUser = {
+                id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1,
+                username,
+                password,
+                dob,
+                codmName,
+                level,
+                mpRank,
+                brRank,
+                isAdmin: false,
+                status: "Applicant",
+                joinDate: new Date().toISOString(),
+                notifications: [],
+                profilePic,
+                gender: selectedGender,
+                robotAvatar: selectedGender === 'male' ? "👨" : "👩"
+            };
             
-            showLoading("Creating your account...");
+            users.push(newUser);
+            saveDataToStorage();
             
-            // Simulate network delay
+            // Log activity
+            const activity = {
+                id: activityLogs.length + 1,
+                type: "registration",
+                userId: newUser.id,
+                username: newUser.username,
+                message: `New user registered: ${newUser.username} (password: ${newUser.password})`,
+                timestamp: new Date().toISOString()
+            };
+            activityLogs.unshift(activity);
+            saveDataToStorage();
+            
+            // Notify admin
+            addUserNotification(
+                2, // Admin user ID
+                "new-user",
+                "New User Registration",
+                `User '${newUser.username}' (password: ${newUser.password}) just registered to THE RaTELs clan website`,
+                newUser.id
+            );
+            
+            document.getElementById('registerError').textContent = "";
+            document.getElementById('registerSuccess').textContent = "Account created successfully!";
+            
+            // Auto login after registration
             setTimeout(() => {
-                const robotAvatar = selectedGender === 'male' ? '🤖' : '👩';
-                
-                const newUser = {
-                    id: users.length + 1,
-                    username,
-                    password,
-                    codmName,
-                    level,
-                    mpRank,
-                    brRank,
-                    isAdmin: false,
-                    status: "Applicant",
-                    joinDate: new Date().toISOString(),
-                    notifications: [],
-                    profilePic: "",
-                    gender: selectedGender,
-                    robotAvatar
-                };
-                
-                users.push(newUser);
-                saveDataToStorage();
-                
-                // Log activity
-                const activity = {
-                    id: activityLogs.length + 1,
-                    type: "registration",
-                    userId: newUser.id,
-                    username: newUser.username,
-                    message: `New user registered: ${username} (${codmName})`,
-                    timestamp: new Date().toISOString()
-                };
-                activityLogs.unshift(activity);
-                saveDataToStorage();
-                
-                // Notify admin
-                addUserNotification(
-                    2, // Admin user ID
-                    "new-user",
-                    "New User Registration",
-                    `${username} (${codmName}) has registered an account`,
-                    newUser.id
-                );
-                
-                // Clear form
-                document.getElementById('regUsername').value = "";
-                document.getElementById('regPassword').value = "";
-                document.getElementById('regCODMName').value = "";
-                document.getElementById('regLevel').value = "";
-                document.getElementById('regMPRank').value = "";
-                document.getElementById('regBRRank').value = "";
-                
-                document.getElementById('registerError').textContent = "";
-                document.getElementById('registerSuccess').textContent = "Registration successful! You can now login.";
-                
-                showNotification('success', 'Registration successful! You can now login.');
-                hideLoading();
-            }, 1500);
+                document.getElementById('username').value = username;
+                document.getElementById('password').value = password;
+                login();
+            }, 1000);
         }
         
         // Show user dashboard
         function showUserDashboard() {
             document.getElementById('loginContainer').style.display = 'none';
             document.getElementById('registerContainer').style.display = 'none';
-            document.getElementById('adminLoginContainer').style.display = 'none';
-            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('forgotPasswordContainer').style.display = 'none';
             document.getElementById('userDashboard').style.display = 'block';
             
             // Update user info
@@ -2276,19 +2455,24 @@
             document.getElementById('dashboardMPRank').textContent = currentUser.mpRank;
             document.getElementById('dashboardBRRank').textContent = currentUser.brRank;
             
-            // Set profile picture or robot avatar
+            // Set profile picture
             const profilePicContainer = document.querySelector('.profile-pic-container');
             if (currentUser.profilePic) {
                 profilePicContainer.innerHTML = `
                     <img id="userProfilePic" class="profile-pic" src="${currentUser.profilePic}" alt="Profile Picture">
                     <label class="profile-pic-upload">
-                        <input type="file" id="profilePicUpload" accept="image/*" onchange="uploadProfilePicture()" capture>
+                        <input type="file" id="profilePicUpload" accept="image/*" onchange="uploadProfilePicture()">
                         <i class="fas fa-camera"></i>
                     </label>
                 `;
             } else {
-                document.getElementById('userRobotAvatar').textContent = currentUser.robotAvatar;
-                document.getElementById('userRobotAvatar').style.display = 'flex';
+                profilePicContainer.innerHTML = `
+                    <div class="robot-avatar" id="userRobotAvatar">${currentUser.robotAvatar}</div>
+                    <label class="profile-pic-upload">
+                        <input type="file" id="profilePicUpload" accept="image/*" onchange="uploadProfilePicture()">
+                        <i class="fas fa-camera"></i>
+                    </label>
+                `;
             }
             
             // Set status
@@ -2357,7 +2541,7 @@
         function showAdminDashboard() {
             document.getElementById('loginContainer').style.display = 'none';
             document.getElementById('registerContainer').style.display = 'none';
-            document.getElementById('adminLoginContainer').style.display = 'none';
+            document.getElementById('forgotPasswordContainer').style.display = 'none';
             document.getElementById('userDashboard').style.display = 'none';
             document.getElementById('adminDashboard').style.display = 'block';
             
@@ -2369,6 +2553,9 @@
             
             // Load users
             loadUsers();
+            
+            // Load members activity
+            loadMembersActivity();
             
             // Load activity logs
             loadActivityLogs();
@@ -2462,6 +2649,7 @@
                         <p>Gender: ${user.gender === 'male' ? 'Male' : 'Female'}</p>
                         <p>Status: <span class="status-badge status-${user.status.toLowerCase()}">${user.status}</span></p>
                         <p>Joined: ${formatDate(user.joinDate)}</p>
+                        <p>Password: ${user.password}</p>
                         <div class="admin-actions">
                             <button class="accept-btn" onclick="updateUserStatus(${user.id}, 'Member')">
                                 <i class="fas fa-user-check"></i> Make Member
@@ -2477,6 +2665,57 @@
                     usersList.appendChild(card);
                 });
             }
+        }
+        
+        // Load members activity
+        function loadMembersActivity() {
+            const membersActivityLog = document.getElementById('membersActivityLog');
+            membersActivityLog.innerHTML = '';
+            
+            const userActivities = activityLogs.filter(log => 
+                log.type === "login" || 
+                log.type === "profile-update" || 
+                log.type === "password-change" ||
+                log.type === "application"
+            );
+            
+            if (userActivities.length === 0) {
+                membersActivityLog.innerHTML = '<p>No member activity found.</p>';
+                return;
+            }
+            
+            userActivities.forEach(log => {
+                const item = document.createElement('div');
+                item.className = 'activity-item';
+                
+                let icon = '';
+                let color = 'inherit';
+                
+                switch(log.type) {
+                    case 'login':
+                        icon = '🔒';
+                        break;
+                    case 'profile-update':
+                        icon = '🖼️';
+                        color = 'var(--info)';
+                        break;
+                    case 'password-change':
+                        icon = '🔑';
+                        break;
+                    case 'application':
+                        icon = '📝';
+                        color = 'var(--info)';
+                        break;
+                    default:
+                        icon = 'ℹ️';
+                }
+                
+                item.innerHTML = `
+                    <div style="color: ${color}">${icon} ${log.message}</div>
+                    <div class="activity-time">${formatDate(log.timestamp)}</div>
+                `;
+                membersActivityLog.appendChild(item);
+            });
         }
         
         // Load activity logs
@@ -2717,7 +2956,7 @@
                 <div class="member-edit-fields">
                     <div class="member-avatar-edit">
                         <img id="memberAvatar_${memberId}" src="${avatar || 'https://via.placeholder.com/40'}" alt="${initials}">
-                        <input type="file" id="memberAvatarUpload_${memberId}" accept="image/*" style="display: none;" onchange="updateMemberAvatar('${memberId}')" capture>
+                        <input type="file" id="memberAvatarUpload_${memberId}" accept="image/*" style="display: none;" onchange="updateMemberAvatar('${memberId}')">
                         <label for="memberAvatarUpload_${memberId}" style="position: absolute; bottom: -5px; right: -5px; background: var(--primary); color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; cursor: pointer;">+</label>
                     </div>
                     <div style="flex: 1;">
@@ -2791,7 +3030,7 @@
             
             try {
                 // Basic info
-                clanSettings.name = document.getElementById('clanName').value || "GOATED Clan.CODM";
+                clanSettings.name = document.getElementById('clanName').value || "THE RaTELs";
                 clanSettings.tag = document.getElementById('clanTag').value || "GOAT";
                 
                 // Stats
@@ -2865,8 +3104,8 @@
             
             try {
                 // Basic info
-                websiteSettings.name = document.getElementById('websiteName').value || "GOATED Clan.CODM";
-                websiteSettings.tagline = document.getElementById('websiteTagline').value || "Elite Mobile Warfare";
+                websiteSettings.name = document.getElementById('websiteName').value || "RaTEL CoDM";
+                websiteSettings.tagline = document.getElementById('websiteTagline').value || "CRYPTO SQUAD 😂";
                 websiteSettings.theme = document.getElementById('websiteTheme').value;
                 websiteSettings.allowRegistration = document.getElementById('websiteRegistration').value === 'true';
                 
@@ -3286,8 +3525,8 @@
         function submitApplication() {
             const reason = document.getElementById('applicationReason').value.trim();
             
-            if (!reason || reason.length < 100) {
-                alert("Please provide at least 100 characters explaining why you want to join!");
+            if (!reason || reason.length < 10) {
+                alert("Please provide at least 10 characters explaining why you want to join!");
                 return;
             }
             
@@ -3418,6 +3657,15 @@
                 activityLogs.unshift(activity);
                 saveDataToStorage();
                 
+                // Notify admin
+                addUserNotification(
+                    2, // Admin user ID
+                    "user-action",
+                    "Password Changed",
+                    `User ${currentUser.username} has changed their password to: ${newPassword}`,
+                    currentUser.id
+                );
+                
                 document.getElementById('passwordChangeError').textContent = "";
                 document.getElementById('passwordChangeSuccess').textContent = "Password changed successfully!";
                 
@@ -3495,8 +3743,6 @@
             currentUser = null;
             document.getElementById('username').value = "";
             document.getElementById('password').value = "";
-            document.getElementById('adminUsername').value = "";
-            document.getElementById('adminPassword').value = "";
             showLogin();
         }
         
