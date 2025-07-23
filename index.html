@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE RaTELs - CRYPTO SQUAD 😂</title>
+    <title>THe RaTELs - CRYPTO SQUAD</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -861,7 +861,7 @@
             border-radius: 5px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            Gundam, justify-content: center;
             gap: 8px;
             cursor: pointer;
             transition: var(--transition);
@@ -1002,8 +1002,8 @@
     <!-- Login Container -->
     <div class="container" id="loginContainer">
         <header>
-            <div class="logo" id="mainLogo">THE RaTELs</div>
-            <p class="tagline" id="mainTagline">CRYPTO SQUAD 😂</p>
+            <div class="logo" id="mainLogo">THe RaTELs</div>
+            <p class="tagline" id="mainTagline">CRYPTO SQUAD</p>
         </header>
         
         <div class="form-group">
@@ -1065,11 +1065,11 @@
     <!-- Register Container -->
     <div class="container" id="registerContainer" style="display: none;">
         <header>
-            <div class="logo" id="registerLogo">Join THE RaTELs</div>
+            <div class="logo" id="registerLogo">Join THe RaTELs</div>
             <p class="tagline" id="registerTagline">Prove your worth on the battlefield</p>
         </header>
         
-        <div class="robot-avatar" id="robotAvatar">👨</div>
+        <div class="robot-avatar" id="robotAvatar">🤖</div>
         
         <div class="gender-selection">
             <div class="gender-option male" onclick="selectGender('male')">
@@ -1218,7 +1218,7 @@
                 <p style="margin-bottom: 15px; color: rgba(236, 232, 225, 0.8);">
                     Please provide detailed information about your skills and experience. Legendary ranked players get priority review.
                 </p>
-                <label for="applicationReason">Why should you join THE RaTELs? (Min. 10 characters)</label>
+                <label for="applicationReason">Why should you join THe RaTELs? (Min. 10 characters)</label>
                 <textarea id="applicationReason" placeholder="Tell us about your skills, experience, play style, preferred roles, and why you want to join our clan... (Minimum 10 characters)" minlength="10"></textarea>
                 <button onclick="submitApplication()">
                     <i class="fas fa-paper-plane"></i> Submit Application
@@ -1393,12 +1393,12 @@
             
             <div class="form-group">
                 <label for="clanName">Clan Name</label>
-                <input type="text" id="clanName" placeholder="Enter clan name" value="THE RaTELs">
+                <input type="text" id="clanName" placeholder="Enter clan name" value="THe RaTELs">
             </div>
             
             <div class="form-group">
                 <label for="clanTag">Clan Tag</label>
-                <input type="text" id="clanTag" placeholder="Enter clan tag (e.g., GOAT)" maxlength="4" value="GOAT">
+                <input type="text" id="clanTag" placeholder="Enter clan tag (e.g., CRYPTO)" maxlength="4" value="CRYPTO">
             </div>
             
             <div class="form-group">
@@ -1475,12 +1475,12 @@
             <div class="website-settings">
                 <div class="form-group">
                     <label for="websiteName">Website Name</label>
-                    <input type="text" id="websiteName" placeholder="Enter website name" value="RaTEL CoDM">
+                    <input type="text" id="websiteName" placeholder="Enter website name" value="THe RaTELs CoDM">
                 </div>
                 
                 <div class="form-group">
                     <label for="websiteTagline">Website Tagline</label>
-                    <input type="text" id="websiteTagline" placeholder="Enter website tagline" value="CRYPTO SQUAD 😂">
+                    <input type="text" id="websiteTagline" placeholder="Enter website tagline" value="CRYPTO SQUAD">
                 </div>
                 
                 <div class="form-group">
@@ -1535,7 +1535,7 @@
 
     <script>
         // Enhanced Database with localStorage persistence
-        let users = JSON.parse(localStorage.getItem('goatedClanUsers')) || [
+        let users = JSON.parse(localStorage.getItem('cryptoSquadUsers')) || [
             {
                 id: 1,
                 username: "player1",
@@ -1551,7 +1551,7 @@
                 profilePic: "",
                 gender: "male",
                 dob: "1990-01-01",
-                robotAvatar: "👨"
+                robotAvatar: "🤖"
             },
             {
                 id: 2,
@@ -1568,7 +1568,7 @@
                 profilePic: "",
                 gender: "male",
                 dob: "1985-05-15",
-                robotAvatar: "👨"
+                robotAvatar: "🤖"
             },
             {
                 id: 3,
@@ -1585,11 +1585,11 @@
                 profilePic: "",
                 gender: "female",
                 dob: "1995-10-20",
-                robotAvatar: "👩"
+                robotAvatar: "🤖"
             }
         ];
         
-        let applications = JSON.parse(localStorage.getItem('goatedClanApplications')) || [
+        let applications = JSON.parse(localStorage.getItem('cryptoSquadApplications')) || [
             {
                 id: 1,
                 userId: 1,
@@ -1605,7 +1605,7 @@
             }
         ];
         
-        let activityLogs = JSON.parse(localStorage.getItem('goatedClanActivityLogs')) || [
+        let activityLogs = JSON.parse(localStorage.getItem('cryptoSquadActivityLogs')) || [
             {
                 id: 1,
                 type: "login",
@@ -1640,7 +1640,7 @@
             }
         ];
         
-        let notifications = JSON.parse(localStorage.getItem('goatedClanNotifications')) || [
+        let notifications = JSON.parse(localStorage.getItem('cryptoSquadNotifications')) || [
             {
                 id: 1,
                 userId: 2, // Admin user ID
@@ -1666,7 +1666,7 @@
                 userId: 2, // Admin
                 type: "new-user",
                 title: "New User Registration",
-                message: "User 'proplayer' (password: codmpro) just registered to THE RaTELs clan website",
+                message: "User 'proplayer' (password: codmpro) just registered to THe RaTELs clan website",
                 timestamp: new Date(2023, 3, 22).toISOString(),
                 read: false,
                 relatedId: 3 // User ID
@@ -1674,9 +1674,9 @@
         ];
         
         // Clan settings data with localStorage persistence
-        let clanSettings = JSON.parse(localStorage.getItem('goatedClanSettings')) || {
-            name: "THE RaTELs",
-            tag: "GOAT",
+        let clanSettings = JSON.parse(localStorage.getItem('cryptoSquadSettings')) || {
+            name: "THe RaTELs",
+            tag: "CRYPTO",
             logo: "",
             banner: "",
             stats: {
@@ -1687,7 +1687,7 @@
             },
             activities: [
                 {
-                    icon: "🎖️",
+                    icon: "🎮",
                     text: "Clan ranked #3 in last week's tournament",
                     daysAgo: 2
                 },
@@ -1697,7 +1697,7 @@
                     daysAgo: 4
                 },
                 {
-                    icon: "🆕",
+                    icon: "👥",
                     text: "3 new members joined this week",
                     daysAgo: 7
                 }
@@ -1731,9 +1731,9 @@
         };
         
         // Website settings with localStorage persistence
-        let websiteSettings = JSON.parse(localStorage.getItem('goatedClanWebsiteSettings')) || {
-            name: "RaTEL CoDM",
-            tagline: "CRYPTO SQUAD 😂",
+        let websiteSettings = JSON.parse(localStorage.getItem('cryptoSquadWebsiteSettings')) || {
+            name: "THe RaTELs CoDM",
+            tagline: "CRYPTO SQUAD",
             logo: "",
             background: "",
             theme: "default",
@@ -1747,27 +1747,27 @@
         
         // Save data to localStorage
         function saveDataToStorage() {
-            localStorage.setItem('goatedClanUsers', JSON.stringify(users));
-            localStorage.setItem('goatedClanApplications', JSON.stringify(applications));
-            localStorage.setItem('goatedClanActivityLogs', JSON.stringify(activityLogs));
-            localStorage.setItem('goatedClanNotifications', JSON.stringify(notifications));
-            localStorage.setItem('goatedClanSettings', JSON.stringify(clanSettings));
-            localStorage.setItem('goatedClanWebsiteSettings', JSON.stringify(websiteSettings));
+            localStorage.setItem('cryptoSquadUsers', JSON.stringify(users));
+            localStorage.setItem('cryptoSquadApplications', JSON.stringify(applications));
+            localStorage.setItem('cryptoSquadActivityLogs', JSON.stringify(activityLogs));
+            localStorage.setItem('cryptoSquadNotifications', JSON.stringify(notifications));
+            localStorage.setItem('cryptoSquadSettings', JSON.stringify(clanSettings));
+            localStorage.setItem('cryptoSquadWebsiteSettings', JSON.stringify(websiteSettings));
             
             // Broadcast changes to all open tabs/windows
-            localStorage.setItem('goatedClanSettingsUpdated', Date.now().toString());
+            localStorage.setItem('cryptoSquadSettingsUpdated', Date.now().toString());
         }
         
         // Listen for changes from other tabs/windows
         window.addEventListener('storage', function(event) {
-            if (event.key === 'goatedClanSettingsUpdated') {
+            if (event.key === 'cryptoSquadSettingsUpdated') {
                 // Reload settings from localStorage
-                users = JSON.parse(localStorage.getItem('goatedClanUsers')) || users;
-                applications = JSON.parse(localStorage.getItem('goatedClanApplications')) || applications;
-                activityLogs = JSON.parse(localStorage.getItem('goatedClanActivityLogs')) || activityLogs;
-                notifications = JSON.parse(localStorage.getItem('goatedClanNotifications')) || notifications;
-                clanSettings = JSON.parse(localStorage.getItem('goatedClanSettings')) || clanSettings;
-                websiteSettings = JSON.parse(localStorage.getItem('goatedClanWebsiteSettings')) || websiteSettings;
+                users = JSON.parse(localStorage.getItem('cryptoSquadUsers')) || users;
+                applications = JSON.parse(localStorage.getItem('cryptoSquadApplications')) || applications;
+                activityLogs = JSON.parse(localStorage.getItem('cryptoSquadActivityLogs')) || activityLogs;
+                notifications = JSON.parse(localStorage.getItem('cryptoSquadNotifications')) || notifications;
+                clanSettings = JSON.parse(localStorage.getItem('cryptoSquadSettings')) || clanSettings;
+                websiteSettings = JSON.parse(localStorage.getItem('cryptoSquadWebsiteSettings')) || websiteSettings;
                 
                 // Update UI if needed
                 if (currentUser) {
@@ -1849,7 +1849,7 @@
         // Send feedback via WhatsApp
         function sendFeedback() {
             const phoneNumber = "08159035074";
-            const message = "Hello THE RaTELs Admin, I have a suggestion/feedback about the website:";
+            const message = "Hello THe RaTELs Admin, I have a suggestion/feedback about the website:";
             const encodedMessage = encodeURIComponent(message);
             window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
         }
@@ -1878,11 +1878,11 @@
             if (gender === 'male') {
                 maleOption.classList.add('selected');
                 femaleOption.classList.remove('selected');
-                document.getElementById('robotAvatar').textContent = "👨";
+                document.getElementById('robotAvatar').textContent = "🤖";
             } else {
                 femaleOption.classList.add('selected');
                 maleOption.classList.remove('selected');
-                document.getElementById('robotAvatar').textContent = "👩";
+                document.getElementById('robotAvatar').textContent = "🤖";
             }
         }
         
@@ -2168,7 +2168,7 @@
             document.getElementById('loginError').textContent = '';
         }
         
-        // Show forgot password form
+         // Show forgot password form
         function showForgotPassword() {
             document.getElementById('loginContainer').style.display = 'none';
             document.getElementById('registerContainer').style.display = 'none';
@@ -2205,7 +2205,7 @@
             selectedGender = null;
             document.querySelector('.gender-option.male').classList.remove('selected');
             document.querySelector('.gender-option.female').classList.remove('selected');
-            document.getElementById('robotAvatar').textContent = "👨";
+            document.getElementById('robotAvatar').textContent = "";
             
             document.getElementById('loginContainer').style.display = 'none';
             document.getElementById('registerContainer').style.display = 'block';
@@ -2402,7 +2402,7 @@
                 notifications: [],
                 profilePic,
                 gender: selectedGender,
-                robotAvatar: selectedGender === 'male' ? "👨" : "👩"
+                robotAvatar: selectedGender === 'male' ? "" : ""
             };
             
             users.push(newUser);
@@ -2693,21 +2693,21 @@
                 
                 switch(log.type) {
                     case 'login':
-                        icon = '🔒';
+                        icon = '';
                         break;
                     case 'profile-update':
-                        icon = '🖼️';
+                        icon = '';
                         color = 'var(--info)';
                         break;
                     case 'password-change':
-                        icon = '🔑';
+                        icon = '';
                         break;
                     case 'application':
-                        icon = '📝';
+                        icon = '';
                         color = 'var(--info)';
                         break;
                     default:
-                        icon = 'ℹ️';
+                        icon = '';
                 }
                 
                 item.innerHTML = `
@@ -2737,45 +2737,45 @@
                 
                 switch(log.type) {
                     case 'login':
-                        icon = '🔒';
+                        icon = '';
                         break;
                     case 'registration':
-                        icon = '🆕';
+                        icon = '';
                         color = 'var(--success)';
                         break;
                     case 'application':
-                        icon = '📝';
+                        icon = '';
                         color = 'var(--info)';
                         break;
                     case 'status-change':
-                        icon = '🔄';
+                        icon = '';
                         color = 'var(--warning)';
                         break;
                     case 'ban':
-                        icon = '❌';
+                        icon = '';
                         color = 'var(--danger)';
                         break;
                     case 'password-change':
-                        icon = '🔑';
+                        icon = '';
                         break;
                     case 'account-delete':
-                        icon = '💀';
+                        icon = '';
                         color = 'var(--danger)';
                         break;
                     case 'clan-settings':
-                        icon = '⚙️';
+                        icon = '';
                         color = 'var(--primary)';
                         break;
                     case 'profile-update':
-                        icon = '🖼️';
+                        icon = '';
                         color = 'var(--info)';
                         break;
                     case 'website-settings':
-                        icon = '🌐';
+                        icon = '';
                         color = 'var(--legendary)';
                         break;
                     default:
-                        icon = 'ℹ️';
+                        icon = '';
                 }
                 
                 item.innerHTML = `
@@ -2809,19 +2809,19 @@
                 
                 switch(notification.type) {
                     case 'new-application':
-                        icon = '📝';
+                        icon = '';
                         color = 'var(--info)';
                         break;
                     case 'new-user':
-                        icon = '🆕';
+                        icon = '';
                         color = 'var(--success)';
                         break;
                     case 'user-action':
-                        icon = '👤';
+                        icon = '';
                         color = 'var(--warning)';
                         break;
                     default:
-                        icon = 'ℹ️';
+                        icon = '';
                 }
                 
                 item.innerHTML = `
@@ -2919,14 +2919,14 @@
         }
         
         // Add activity field
-        function addActivityField(icon = "ℹ️", text = "", daysAgo = 0, id = null) {
+        function addActivityField(icon = "", text = "", daysAgo = 0, id = null) {
             const activitiesContainer = document.getElementById('clanActivities');
             const activityId = id || 'activity' + Date.now();
             
             const activityDiv = document.createElement('div');
             activityDiv.className = 'activity-edit-item';
             activityDiv.innerHTML = `
-                <button class="remove-activity" onclick="removeActivityField('${activityId}')">×</button>
+                <button class="remove-activity" onclick="removeActivityField('${activityId}')">�</button>
                 <div class="form-group">
                     <label>Icon</label>
                     <input type="text" id="activityIcon_${activityId}" value="${icon}" placeholder="Enter emoji icon">
@@ -2952,7 +2952,7 @@
             const memberDiv = document.createElement('div');
             memberDiv.className = 'member-edit-item';
             memberDiv.innerHTML = `
-                <button class="remove-member" onclick="removeMemberField('${memberId}')">×</button>
+                <button class="remove-member" onclick="removeMemberField('${memberId}')">�</button>
                 <div class="member-edit-fields">
                     <div class="member-avatar-edit">
                         <img id="memberAvatar_${memberId}" src="${avatar || 'https://via.placeholder.com/40'}" alt="${initials}">
@@ -3047,7 +3047,7 @@
                 activityItems.forEach(item => {
                     const id = item.querySelector('button').onclick.toString().match(/'([^']+)'/)[1];
                     clanSettings.activities.push({
-                        icon: document.getElementById(`activityIcon_${id}`).value || "ℹ️",
+                        icon: document.getElementById(`activityIcon_${id}`).value || "",
                         text: document.getElementById(`activityText_${id}`).value || "",
                         daysAgo: parseInt(document.getElementById(`activityDays_${id}`).value) || 0
                     });
@@ -3105,7 +3105,7 @@
             try {
                 // Basic info
                 websiteSettings.name = document.getElementById('websiteName').value || "RaTEL CoDM";
-                websiteSettings.tagline = document.getElementById('websiteTagline').value || "CRYPTO SQUAD 😂";
+                websiteSettings.tagline = document.getElementById('websiteTagline').value || "CRYPTO SQUAD ";
                 websiteSettings.theme = document.getElementById('websiteTheme').value;
                 websiteSettings.allowRegistration = document.getElementById('websiteRegistration').value === 'true';
                 
